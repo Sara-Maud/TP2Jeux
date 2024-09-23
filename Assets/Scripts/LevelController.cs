@@ -7,11 +7,12 @@ public class LevelController : MonoBehaviour
 
     public GameObject ennemiMechant;
     private float rangeSpawn = 9;
+    int ennemisRestant;
+    int niveauDeVague = 1;
 
     // Start is called before the first frame update
     void Start()
     {
-        SpawnEnnemy();
     }
 
 
@@ -25,12 +26,23 @@ public class LevelController : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        
+        ennemisRestant = FindObjectsOfType<EnemyController>().Length;
+        if (ennemisRestant == 0)
+        {
+            SpawnVagueEnnemi(niveauDeVague);
+            niveauDeVague++;
+        }
     }
 
-    private void SpawnEnnemy()
+
+
+    private void SpawnVagueEnnemi(int nombreVague)
     {
-       var ennemi = Instantiate(ennemiMechant, GetRandomPosition(), ennemiMechant.transform.rotation);
-        ennemi.GetComponent<EnemyController>().InitializeEnemy();
+        for (int i = 0; i < nombreVague; i++)
+        {
+            var ennemi = Instantiate(ennemiMechant, GetRandomPosition(), ennemiMechant.transform.rotation);
+            ennemi.GetComponent<EnemyController>().InitializeEnemy();
+        }
     }
+
 }

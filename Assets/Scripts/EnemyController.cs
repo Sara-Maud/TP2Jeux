@@ -1,3 +1,4 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
@@ -7,6 +8,21 @@ public class EnemyController : MonoBehaviour
     private float speed = 0.1f;
     private Rigidbody enemyRb;
     private GameObject player;
+    private int nombreVagueEnCours = 1;
+
+    private void Start()
+    {
+        SpawnVagueEnnemi(nombreVagueEnCours);
+    }
+
+    private void SpawnVagueEnnemi(int nombreVague)
+    {
+        for (int i = 0; i < nombreVague; i++)
+        {
+            InitializeEnemy();
+        }
+    }
+
 
     // Start is called before the first frame update
     public void InitializeEnemy()
