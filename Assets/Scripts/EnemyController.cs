@@ -8,19 +8,9 @@ public class EnemyController : MonoBehaviour
     private float speed = 0.1f;
     private Rigidbody enemyRb;
     private GameObject player;
-    private int nombreVagueEnCours = 1;
 
     private void Start()
     {
-        SpawnVagueEnnemi(nombreVagueEnCours);
-    }
-
-    private void SpawnVagueEnnemi(int nombreVague)
-    {
-        for (int i = 0; i < nombreVague; i++)
-        {
-            InitializeEnemy();
-        }
     }
 
 
@@ -34,6 +24,8 @@ public class EnemyController : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
+
+
         Vector3 directionCamera = (player.transform.position - transform.position).normalized;
         enemyRb.AddForce(directionCamera * speed);
     }

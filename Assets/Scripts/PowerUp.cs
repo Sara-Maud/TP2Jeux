@@ -17,7 +17,7 @@ public class PowerUp : MonoBehaviour
 
     public void OnTriggerEnter(Collider other)
     {
-        if (other.CompareTag("Player"))
+        if (other.CompareTag("Player") )
         {
             Destroy(this.gameObject);
             //Appel fonction dans playercontroller pour lancer le powerup
