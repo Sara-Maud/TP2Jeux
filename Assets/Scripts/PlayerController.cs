@@ -21,4 +21,11 @@ public class PlayerController : MonoBehaviour
         float verticalInput = Input.GetAxis("Vertical");
         playerRb.AddForce(focalPoint.transform.forward * speed * verticalInput);
     }
+
+
+    public void EnablePowerUp()
+    {
+        Debug.Log("cc"); 
+    }
+
 }

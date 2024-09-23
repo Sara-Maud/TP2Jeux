@@ -4,15 +4,24 @@ using UnityEngine;
 
 public class PowerUp : MonoBehaviour
 {
-    // Start is called before the first frame update
-    void Start()
+    public GameObject[] listePowerUp;
+
+    public PlayerController playerController;
+
+
+    private void Start()
     {
-        
+        playerController = GameObject.Find("Player").GetComponent<PlayerController>();
+    
     }
 
-    // Update is called once per frame
-    void Update()
+    public void OnTriggerEnter(Collider other)
     {
-        
+        if (other.CompareTag("Player"))
+        {
+            Destroy(this.gameObject);
+            //Appel fonction dans playercontroller pour lancer le powerup
+            playerController.EnablePowerUp();
+        }
     }
 }
