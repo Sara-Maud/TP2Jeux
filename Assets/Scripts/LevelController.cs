@@ -10,13 +10,13 @@ public class LevelController : MonoBehaviour
     int niveauDeVague = 2;
     public GameObject powerUpGameObject;
     private bool isGameOver;
+    
 
     // Start is called before the first frame update
     void Start()
     {
-        Instantiate(powerUpGameObject, GetRandomPosition(),
-            powerUpGameObject.transform.rotation);
         ennemisRestant = 0;
+        SpawnVagueEnnemi(niveauDeVague);
     }
 
 
@@ -27,31 +27,18 @@ public class LevelController : MonoBehaviour
         return new Vector3(spawnPosX, 0, spawnPosZ);
     }
 
-    // Update is called once per frame
-    void Update()
-    {
-        if (ennemisRestant == 0)
-        {
-            ennemisRestant = niveauDeVague;
-            //Spawn Ennemies
-            SpawnVagueEnnemi(niveauDeVague);
-            niveauDeVague++;
-            //Spawn Power Up
-            Instantiate(powerUpGameObject, GetRandomPosition(), 
-                powerUpGameObject.transform.rotation);
-        }
-    }
-
-
-
     private void SpawnVagueEnnemi(int nombreEnnemie)
     {
         //Changer l'apparance des ennemies ici
         for (int i = 0; i < nombreEnnemie; i++)
         {
+            ennemisRestant++;
             var ennemi = Instantiate(ennemiMechant, GetRandomPosition(), ennemiMechant.transform.rotation);
-            ennemi.GetComponent<EnemyController>().InitializeEnemy();
+            ennemi.GetComponent<EnemyController>().InitializeEnemy(0.02f, 2f);
         }
+        //Spawn Power Up
+        Instantiate(powerUpGameObject, GetRandomPosition(),
+            powerUpGameObject.transform.rotation);
     }
 
     internal void GameOver()
@@ -62,5 +49,11 @@ public class LevelController : MonoBehaviour
     internal void EnemyOutOfBound()
     {
         ennemisRestant--;
+        if(ennemisRestant == 0)
+        {
+            //Spawn Ennemies
+            SpawnVagueEnnemi(niveauDeVague);
+            niveauDeVague++;
+        }
     }
 }

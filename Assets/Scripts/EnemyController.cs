@@ -9,14 +9,8 @@ public class EnemyController : MonoBehaviour
     private Rigidbody enemyRb;
     private GameObject player;
 
-    private void Start()
-    {
-        InitializeEnemy();
-    }
-
-
     // Start is called before the first frame update
-    public void InitializeEnemy()
+    public void InitializeEnemy(float vitesse, float masse)
     {
         enemyRb = GetComponent<Rigidbody>();
         player = GameObject.Find("Player");

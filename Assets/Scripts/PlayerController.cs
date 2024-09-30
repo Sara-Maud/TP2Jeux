@@ -7,6 +7,9 @@ public class PlayerController : MonoBehaviour
     private float speed = 8f;
     private Rigidbody playerRb;
     public GameObject focalPoint;
+    private bool hasPowerUpForce;
+    private bool hasPowerUpTaille;
+    private float powerUpForce = 15f;
 
     // Start is called before the first frame update
     void Start()
@@ -25,10 +28,35 @@ public class PlayerController : MonoBehaviour
 
     public void EnablePowerUp(string typePowerUp)
     {
-        Debug.Log("cc"); 
         if(typePowerUp == "PowerUpTaille")
-            Debug.Log("cc");
-        else Debug.Log("cc2");
+        {
+            hasPowerUpTaille = true;
+            StartCoroutine(PowerUpTailleCountDown());
+        }
+        else if(typePowerUp == "PowerUpForce")
+        {
+            hasPowerUpForce = true;
+            StartCoroutine(PowerUpForceCountDown());
+        }
     }
+    IEnumerator PowerUpForceCountDown()
+    {
+        yield return new WaitForSeconds(5);
+        hasPowerUpForce = false;
+    }
+    IEnumerator PowerUpTailleCountDown()
+    {
+        yield return new WaitForSeconds(7);
+        hasPowerUpTaille = false;
+    }
+    private void OnCollisionEnter(Collision collision)
+    {
+        if (collision.gameObject.CompareTag("Mechant") && hasPowerUpForce)
+        {
+            Rigidbody enemiRigidbody = collision.gameObject.GetComponent<Rigidbody>();
+            Vector3 eloigneDuJoueur = (collision.gameObject.transform.position - transform.position);
 
+            enemiRigidbody.AddForce(eloigneDuJoueur * powerUpForce, ForceMode.Impulse);
+        }
+    }
 }
