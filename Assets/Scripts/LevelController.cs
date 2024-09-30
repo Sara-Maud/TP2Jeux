@@ -4,7 +4,7 @@ using UnityEngine;
 
 public class LevelController : MonoBehaviour
 {
-
+    private OutOfBoundsTrigger outOfBoundsTrigger;
     public GameObject ennemiMechant;
     private float rangeSpawn = 9;
     int ennemisRestant;
@@ -16,6 +16,7 @@ public class LevelController : MonoBehaviour
     {
         Instantiate(powerUpGameObject, GetRandomPosition(),
             powerUpGameObject.transform.rotation);
+        outOfBoundsTrigger = FindObjectOfType<OutOfBoundsTrigger>();
     }
 
 
@@ -29,11 +30,12 @@ public class LevelController : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        ennemisRestant = FindObjectsOfType<EnemyController>().Length;
+        ennemisRestant = outOfBoundsTrigger.GetNombreEnnemieRestant();
         if (ennemisRestant == 0)
         {
-            //Spwan Ennemies
+            //Spawn Ennemies
             SpawnVagueEnnemi(niveauDeVague);
+            outOfBoundsTrigger.SetNombreEnnemieRestant(niveauDeVague);
             niveauDeVague++;
             //Spawn Power Up
             Instantiate(powerUpGameObject, GetRandomPosition(), 
@@ -46,6 +48,7 @@ public class LevelController : MonoBehaviour
 
     private void SpawnVagueEnnemi(int nombreEnnemie)
     {
+        //Changer l'apparance des ennemies ici
         for (int i = 0; i < nombreEnnemie; i++)
         {
             var ennemi = Instantiate(ennemiMechant, GetRandomPosition(), ennemiMechant.transform.rotation);

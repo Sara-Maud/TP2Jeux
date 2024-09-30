@@ -1,18 +1,35 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
 public class OutOfBoundsTrigger : MonoBehaviour
 {
-    // Start is called before the first frame update
-    void Start()
+    private bool isGameOver = false;
+    private int ennemisRestant = 0;
+
+    private void OnTriggerEnter(Collider other)
     {
-        
+        if (other.CompareTag("Mechant"))
+        {
+            ennemisRestant--;
+        }
+        else if(other.CompareTag("Player"))
+        {
+            isGameOver = true;
+        }
+    }
+    public bool IsGameOver()
+    {
+        return isGameOver;
+    }
+    public int GetNombreEnnemieRestant()
+    {
+        return ennemisRestant;
+    }
+    public void SetNombreEnnemieRestant(int nombreEnnemie)
+    {
+        ennemisRestant = nombreEnnemie;
     }
 
-    // Update is called once per frame
-    void Update()
-    {
-        
-    }
 }
