@@ -10,6 +10,7 @@ public class LevelController : MonoBehaviour
     int niveauDeVague = 2;
     public GameObject powerUpGameObject;
     private bool isGameOver;
+    float amelioration = 0;
     
 
     // Start is called before the first frame update
@@ -29,12 +30,13 @@ public class LevelController : MonoBehaviour
 
     private void SpawnVagueEnnemi(int nombreEnnemie)
     {
+        amelioration += 0.2f;
         //Changer l'apparance des ennemies ici
         for (int i = 0; i < nombreEnnemie; i++)
         {
             ennemisRestant++;
             var ennemi = Instantiate(ennemiMechant, GetRandomPosition(), ennemiMechant.transform.rotation);
-            ennemi.GetComponent<EnemyController>().InitializeEnemy(0.02f, 2f);
+            ennemi.GetComponent<EnemyController>().InitializeEnemy(amelioration);
         }
         //Spawn Power Up
         Instantiate(powerUpGameObject, GetRandomPosition(),
