@@ -11,6 +11,7 @@ public class EnemyController : MonoBehaviour
 
     private void Start()
     {
+        InitializeEnemy();
     }
 
 
@@ -24,9 +25,11 @@ public class EnemyController : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-
-
         Vector3 directionCamera = (player.transform.position - transform.position).normalized;
         enemyRb.AddForce(directionCamera * speed);
+
+        //Détruit ennemie si tomber de l'ile
+        if(transform.position.y < -15) 
+            Destroy(gameObject);
     }
 }
