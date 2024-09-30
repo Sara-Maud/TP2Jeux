@@ -9,10 +9,13 @@ public class LevelController : MonoBehaviour
     private float rangeSpawn = 9;
     int ennemisRestant;
     int niveauDeVague = 2;
+    public GameObject powerUpGameObject;
 
     // Start is called before the first frame update
     void Start()
     {
+        Instantiate(powerUpGameObject, GetRandomPosition(),
+            powerUpGameObject.transform.rotation);
     }
 
 
@@ -29,8 +32,13 @@ public class LevelController : MonoBehaviour
         ennemisRestant = FindObjectsOfType<EnemyController>().Length;
         if (ennemisRestant == 0)
         {
+            //Spwan Ennemies
             SpawnVagueEnnemi(niveauDeVague);
             niveauDeVague++;
+            //Spawn Power Up
+            Instantiate(powerUpGameObject, GetRandomPosition(), 
+                powerUpGameObject.transform.rotation);
+
         }
     }
 

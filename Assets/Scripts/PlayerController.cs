@@ -23,9 +23,12 @@ public class PlayerController : MonoBehaviour
     }
 
 
-    public void EnablePowerUp()
+    public void EnablePowerUp(string typePowerUp)
     {
         Debug.Log("cc"); 
+        if(typePowerUp == "PowerUpTaille")
+            Debug.Log("cc");
+        else Debug.Log("cc2");
     }
 
 }

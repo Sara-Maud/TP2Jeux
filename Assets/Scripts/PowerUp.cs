@@ -21,7 +21,7 @@ public class PowerUp : MonoBehaviour
         {
             Destroy(this.gameObject);
             //Appel fonction dans playercontroller pour lancer le powerup
-            playerController.EnablePowerUp();
+            playerController.EnablePowerUp(this.tag);
         }
     }
 }

@@ -6,6 +6,9 @@ TagManager:
   tags:
   - Powerup
   - Mechant
+  - New tag
+  - PowerUpTaille
+  - PowerUpForce
   layers:
   - Default
   - TransparentFX
