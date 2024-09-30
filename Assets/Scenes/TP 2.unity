@@ -213,6 +213,7 @@ GameObject:
   m_Component:
   - component: {fileID: 330697212}
   - component: {fileID: 330697211}
+  - component: {fileID: 330697213}
   m_Layer: 0
   m_Name: OOB Trigger
   m_TagString: Untagged
@@ -256,6 +257,18 @@ Transform:
   m_Children: []
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &330697213
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 330697210}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 6f2f9656bdacfee4489c8f9fc8741334, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &1202240947
 GameObject:
   m_ObjectHideFlags: 0
@@ -652,7 +665,6 @@ GameObject:
   - component: {fileID: 1755856158}
   - component: {fileID: 1755856161}
   - component: {fileID: 1755856160}
-  - component: {fileID: 1755856159}
   m_Layer: 0
   m_Name: SoundManager
   m_TagString: Untagged
@@ -675,18 +687,6 @@ Transform:
   m_Children: []
   m_Father: {fileID: 1211419928}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!114 &1755856159
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1755856157}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 9553dc926d716b84091b9b7f8c3be5fd, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
 --- !u!82 &1755856160
 AudioSource:
   m_ObjectHideFlags: 0

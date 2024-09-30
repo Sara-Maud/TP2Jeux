@@ -5,31 +5,28 @@ using UnityEngine;
 
 public class OutOfBoundsTrigger : MonoBehaviour
 {
-    private bool isGameOver = false;
-    private int ennemisRestant = 0;
+    private LevelController levelController;
+
+    private void Start()
+    {
+        levelController = FindObjectOfType<LevelController>();
+    }
 
     private void OnTriggerEnter(Collider other)
     {
         if (other.CompareTag("Mechant"))
         {
-            ennemisRestant--;
+            //Détruit ennemie si tomber de l'ile
+            Destroy(other.gameObject);
+
+            levelController.EnemyOutOfBound();
         }
         else if(other.CompareTag("Player"))
         {
-            isGameOver = true;
+            levelController.GameOver();
         }
     }
-    public bool IsGameOver()
-    {
-        return isGameOver;
-    }
-    public int GetNombreEnnemieRestant()
-    {
-        return ennemisRestant;
-    }
-    public void SetNombreEnnemieRestant(int nombreEnnemie)
-    {
-        ennemisRestant = nombreEnnemie;
-    }
+   
+    
 
 }

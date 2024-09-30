@@ -4,19 +4,19 @@ using UnityEngine;
 
 public class LevelController : MonoBehaviour
 {
-    private OutOfBoundsTrigger outOfBoundsTrigger;
     public GameObject ennemiMechant;
     private float rangeSpawn = 9;
     int ennemisRestant;
     int niveauDeVague = 2;
     public GameObject powerUpGameObject;
+    private bool isGameOver;
 
     // Start is called before the first frame update
     void Start()
     {
         Instantiate(powerUpGameObject, GetRandomPosition(),
             powerUpGameObject.transform.rotation);
-        outOfBoundsTrigger = FindObjectOfType<OutOfBoundsTrigger>();
+        ennemisRestant = 0;
     }
 
 
@@ -30,17 +30,15 @@ public class LevelController : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        ennemisRestant = outOfBoundsTrigger.GetNombreEnnemieRestant();
         if (ennemisRestant == 0)
         {
+            ennemisRestant = niveauDeVague;
             //Spawn Ennemies
             SpawnVagueEnnemi(niveauDeVague);
-            outOfBoundsTrigger.SetNombreEnnemieRestant(niveauDeVague);
             niveauDeVague++;
             //Spawn Power Up
             Instantiate(powerUpGameObject, GetRandomPosition(), 
                 powerUpGameObject.transform.rotation);
-
         }
     }
 
@@ -56,4 +54,13 @@ public class LevelController : MonoBehaviour
         }
     }
 
+    internal void GameOver()
+    {
+        isGameOver = true;
+    }
+
+    internal void EnemyOutOfBound()
+    {
+        ennemisRestant--;
+    }
 }

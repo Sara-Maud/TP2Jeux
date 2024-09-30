@@ -28,8 +28,6 @@ public class EnemyController : MonoBehaviour
         Vector3 directionCamera = (player.transform.position - transform.position).normalized;
         enemyRb.AddForce(directionCamera * speed);
 
-        //Détruit ennemie si tomber de l'ile
-        if(transform.position.y < -15) 
-            Destroy(gameObject);
+        
     }
 }
