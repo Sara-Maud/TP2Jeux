@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using static PowerUp;
 
 public class PlayerController : MonoBehaviour
 {
@@ -26,14 +27,14 @@ public class PlayerController : MonoBehaviour
     }
 
 
-    public void EnablePowerUp(string typePowerUp)
+    public void EnablePowerUp(PowerUpType typePowerUp)
     {
-        if(typePowerUp == "PowerUpTaille")
+        if(typePowerUp == PowerUpType.taille)
         {
             hasPowerUpTaille = true;
             StartCoroutine(PowerUpTailleCountDown());
         }
-        else if(typePowerUp == "PowerUpForce")
+        else if(typePowerUp == PowerUpType.force)
         {
             hasPowerUpForce = true;
             StartCoroutine(PowerUpForceCountDown());

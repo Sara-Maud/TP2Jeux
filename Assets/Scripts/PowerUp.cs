@@ -8,6 +8,7 @@ public class PowerUp : MonoBehaviour
 
     public PlayerController playerController;
 
+    public PowerUpType powerUp;
 
     private void Start()
     {
@@ -21,7 +22,13 @@ public class PowerUp : MonoBehaviour
         {
             Destroy(this.gameObject);
             //Appel fonction dans playercontroller pour lancer le powerup
-            playerController.EnablePowerUp(this.tag);
+            playerController.EnablePowerUp(powerUp);
         }
+    }
+
+    public enum PowerUpType
+    {
+        taille,
+        force
     }
 }

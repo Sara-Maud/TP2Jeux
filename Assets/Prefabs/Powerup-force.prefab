@@ -100,6 +100,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   listePowerUp: []
   playerController: {fileID: 0}
+  powerUp: 1
 --- !u!54 &645207126422241758
 Rigidbody:
   m_ObjectHideFlags: 0
