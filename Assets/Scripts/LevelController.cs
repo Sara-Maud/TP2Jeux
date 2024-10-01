@@ -8,7 +8,7 @@ public class LevelController : MonoBehaviour
     private float rangeSpawn = 9;
     int ennemisRestant;
     int niveauDeVague = 2;
-    public GameObject powerUpGameObject;
+    public GameObject[] powerUpListe;
     private bool isGameOver;
     float amelioration = 0;
     
@@ -39,8 +39,17 @@ public class LevelController : MonoBehaviour
             ennemi.GetComponent<EnemyController>().InitializeEnemy(amelioration);
         }
         //Spawn Power Up
-        Instantiate(powerUpGameObject, GetRandomPosition(),
-            powerUpGameObject.transform.rotation);
+        SpawnPowerUp();
+    }
+
+    private void SpawnPowerUp()
+    {
+        int nombrePowerUpSpawn = Random.Range(1, 3);
+        int index = Random.Range(0, powerUpListe.Length);
+        GameObject powerUp = powerUpListe[index];
+        for (int i = 0;i < nombrePowerUpSpawn;i++)
+            Instantiate(powerUp, GetRandomPosition(),
+                powerUp.transform.rotation);
     }
 
     internal void GameOver()

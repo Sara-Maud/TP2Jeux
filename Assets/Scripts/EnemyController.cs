@@ -15,7 +15,7 @@ public class EnemyController : MonoBehaviour
         enemyRb = GetComponent<Rigidbody>();
         player = GameObject.Find("Player");
         //Augmente la masse du l'ennemie à chaque vague
-        enemyRb.mass = enemyRb.mass * amelioration;
+        enemyRb.mass *= amelioration;
         speed *= amelioration + 0.1f;
 
         //Change l'apparance de l'ennemie

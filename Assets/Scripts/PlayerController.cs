@@ -1,3 +1,4 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
@@ -7,16 +8,21 @@ public class PlayerController : MonoBehaviour
 {
     private float speed = 8f;
     private Rigidbody playerRb;
-    public GameObject focalPoint;
     private bool hasPowerUpForce;
-    private bool hasPowerUpTaille;
     private float powerUpForce = 15f;
+    public GameObject focalPoint;
+    public GameObject player;
+    private float ameliorationTaille = 1.5f;
+    private float aparenceTaille = 0.2f;
+    private float color = 0f;
+    private float metalique = 0f;
+    private float smootehness = 0f;
+    private float ameliorationForce = 0.5f;
 
     // Start is called before the first frame update
     void Start()
     {
         playerRb = GetComponent<Rigidbody>();
-        focalPoint = GameObject.Find("FocalPoint");
     }
 
     // Update is called once per frame
@@ -24,19 +30,31 @@ public class PlayerController : MonoBehaviour
     {
         float verticalInput = Input.GetAxis("Vertical");
         playerRb.AddForce(focalPoint.transform.forward * speed * verticalInput);
+
     }
 
 
     public void EnablePowerUp(PowerUpType typePowerUp)
     {
+        var renderer = GetComponent<MeshRenderer>();
+        var mat = renderer.material;
         if(typePowerUp == PowerUpType.taille)
         {
-            hasPowerUpTaille = true;
-            StartCoroutine(PowerUpTailleCountDown());
+            player.transform.localScale += new Vector3(ameliorationTaille - 1, ameliorationTaille - 1, ameliorationTaille - 1);
+            playerRb.mass *= ameliorationTaille;
+            speed *= ameliorationTaille;
+            color += aparenceTaille;
+            metalique += aparenceTaille;
+            smootehness += aparenceTaille;
+            mat.SetFloat("_color", color);
+            mat.SetFloat("_metalique", metalique);
+            mat.SetFloat("_smootehness", smootehness);
         }
         else if(typePowerUp == PowerUpType.force)
         {
             hasPowerUpForce = true;
+            mat.SetFloat("_color", color + ameliorationForce);
+            mat.SetFloat("_metalique", metalique + ameliorationForce);
             StartCoroutine(PowerUpForceCountDown());
         }
     }
@@ -44,12 +62,13 @@ public class PlayerController : MonoBehaviour
     {
         yield return new WaitForSeconds(5);
         hasPowerUpForce = false;
+
+        var renderer = GetComponent<MeshRenderer>();
+        var mat = renderer.material;
+        mat.SetFloat("_color", color - ameliorationForce);
+        mat.SetFloat("_metalique", metalique - ameliorationForce);
     }
-    IEnumerator PowerUpTailleCountDown()
-    {
-        yield return new WaitForSeconds(7);
-        hasPowerUpTaille = false;
-    }
+
     private void OnCollisionEnter(Collision collision)
     {
         if (collision.gameObject.CompareTag("Mechant") && hasPowerUpForce)
