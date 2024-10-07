@@ -17,7 +17,6 @@ public class PlayerController : MonoBehaviour
     private float color = 0f;
     private float metalique = 0f;
     private float smootehness = 0f;
-    private float ameliorationForce = 0.5f;
 
     // Start is called before the first frame update
     void Start()
@@ -52,8 +51,7 @@ public class PlayerController : MonoBehaviour
         else if(typePowerUp == PowerUpType.force)
         {
             hasPowerUpForce = true;
-            mat.SetFloat("_color", color + ameliorationForce);
-            mat.SetFloat("_metalique", metalique + ameliorationForce);
+            mat.SetFloat("_opaciteForce",10);
             StartCoroutine(PowerUpForceCountDown());
         }
     }
@@ -64,8 +62,7 @@ public class PlayerController : MonoBehaviour
 
         var renderer = GetComponent<MeshRenderer>();
         var mat = renderer.material;
-        mat.SetFloat("_color", color - ameliorationForce);
-        mat.SetFloat("_metalique", metalique - ameliorationForce);
+        mat.SetFloat("_opaciteForce", 0);
     }
 
     private void OnCollisionEnter(Collision collision)
