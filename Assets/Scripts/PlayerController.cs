@@ -25,11 +25,10 @@ public class PlayerController : MonoBehaviour
         playerRb = GetComponent<Rigidbody>();
     }
 
-    // Update is called once per frame
-    void Update()
+    void FixedUpdate()
     {
         float verticalInput = Input.GetAxis("Vertical");
-        playerRb.AddForce(focalPoint.transform.forward * speed * verticalInput);
+        playerRb.AddForce(focalPoint.transform.forward * speed * verticalInput * Time.deltaTime);
 
     }
 
@@ -42,6 +41,7 @@ public class PlayerController : MonoBehaviour
         {
             player.transform.localScale += new Vector3(ameliorationTaille - 1, ameliorationTaille - 1, ameliorationTaille - 1);
             playerRb.mass *= ameliorationTaille;
+            //Change l'apparence du Joueur
             speed *= ameliorationTaille;
             color += aparenceTaille;
             metalique += aparenceTaille;

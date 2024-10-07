@@ -1,5 +1,6 @@
 using System.Collections;
 using System.Collections.Generic;
+using Unity.VisualScripting;
 using UnityEngine;
 
 public class LevelController : MonoBehaviour
@@ -23,15 +24,13 @@ public class LevelController : MonoBehaviour
 
     private Vector3 GetRandomPosition()
     {
-        float spawnPosX = Random.Range(-rangeSpawn, rangeSpawn);
-        float spawnPosZ = Random.Range(-rangeSpawn, rangeSpawn);
-        return new Vector3(spawnPosX, 0, spawnPosZ);
+        Vector2 spawnPos = Random.insideUnitCircle * 5;
+        return new Vector3(spawnPos.x, 0, spawnPos.y);
     }
 
     private void SpawnVagueEnnemi(int nombreEnnemie)
     {
         amelioration += 0.2f;
-        //Changer l'apparance des ennemies ici
         for (int i = 0; i < nombreEnnemie; i++)
         {
             ennemisRestant++;

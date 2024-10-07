@@ -26,10 +26,10 @@ public class EnemyController : MonoBehaviour
     }
 
     // Update is called once per frame
-    void Update()
+    void FixedUpdate()
     {
         Vector3 directionCamera = (player.transform.position - transform.position).normalized;
-        enemyRb.AddForce(directionCamera * speed);
+        enemyRb.AddForce(directionCamera * speed * Time.deltaTime);
 
         
     }
