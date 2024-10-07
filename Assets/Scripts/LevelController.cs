@@ -12,6 +12,7 @@ public class LevelController : MonoBehaviour
     public GameObject[] powerUpListe;
     private bool isGameOver;
     float amelioration = 0;
+    public static LevelController instance;
     
 
     // Start is called before the first frame update
