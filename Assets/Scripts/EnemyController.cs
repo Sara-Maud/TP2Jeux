@@ -5,7 +5,7 @@ using UnityEngine;
 
 public class EnemyController : MonoBehaviour
 {
-    private float speed = 0.3f;
+    private float speed = 0.7f;
     private Rigidbody enemyRb;
     private GameObject player;
 
@@ -29,7 +29,7 @@ public class EnemyController : MonoBehaviour
     void FixedUpdate()
     {
         Vector3 directionCamera = (player.transform.position - transform.position).normalized;
-        enemyRb.AddForce(directionCamera * speed * Time.deltaTime);
+        enemyRb.AddForce(directionCamera * speed);
 
         
     }

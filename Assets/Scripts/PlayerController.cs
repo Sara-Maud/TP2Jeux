@@ -6,7 +6,7 @@ using static PowerUp;
 
 public class PlayerController : MonoBehaviour
 {
-    private float speed = 8f;
+    private float speed = 100f;
     private Rigidbody playerRb;
     private bool hasPowerUpForce;
     private float powerUpForce = 15f;
@@ -28,7 +28,7 @@ public class PlayerController : MonoBehaviour
     void FixedUpdate()
     {
         float verticalInput = Input.GetAxis("Vertical");
-        playerRb.AddForce(focalPoint.transform.forward * speed * verticalInput * Time.deltaTime);
+        playerRb.AddForce(focalPoint.transform.forward * speed * verticalInput);
 
     }
 
@@ -41,7 +41,6 @@ public class PlayerController : MonoBehaviour
         {
             player.transform.localScale += new Vector3(ameliorationTaille - 1, ameliorationTaille - 1, ameliorationTaille - 1);
             playerRb.mass *= ameliorationTaille;
-            //Change l'apparence du Joueur
             speed *= ameliorationTaille;
             color += aparenceTaille;
             metalique += aparenceTaille;
@@ -71,6 +70,7 @@ public class PlayerController : MonoBehaviour
 
     private void OnCollisionEnter(Collision collision)
     {
+       
         if (collision.gameObject.CompareTag("Mechant") && hasPowerUpForce)
         {
             Rigidbody enemiRigidbody = collision.gameObject.GetComponent<Rigidbody>();
@@ -78,5 +78,19 @@ public class PlayerController : MonoBehaviour
 
             enemiRigidbody.AddForce(eloigneDuJoueur * powerUpForce, ForceMode.Impulse);
         }
+        if (collision.gameObject.CompareTag("Mechant"))
+        { 
+            var renderer = GetComponent<MeshRenderer>();
+            var mat = renderer.material;
+            mat.SetFloat("_opacite", 1);
+            StartCoroutine(HitCounDown());
+        }
+    }
+    IEnumerator HitCounDown()
+    {
+        yield return new WaitForSeconds(1);
+        var renderer = GetComponent<MeshRenderer>();
+        var mat = renderer.material;
+        mat.SetFloat("_opacite", 0);
     }
 }
