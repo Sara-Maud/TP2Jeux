@@ -12,6 +12,10 @@ public class LevelController : MonoBehaviour
     public GameObject[] powerUpListe;
     private bool isGameOver;
     float amelioration = 0;
+    public AudioClip audioClipGameOver;
+    public AudioClip audioClipPowerUp;
+
+    private AudioSource audioSource;
     
 
     // Start is called before the first frame update
@@ -19,6 +23,7 @@ public class LevelController : MonoBehaviour
     {
         ennemisRestant = 0;
         SpawnVagueEnnemi(niveauDeVague);
+        audioSource = GetComponent<AudioSource>();
     }
 
 
@@ -43,6 +48,8 @@ public class LevelController : MonoBehaviour
         }
         //Spawn Power Up
         SpawnPowerUp();
+
+            //Si game over fait spawner 300 ennemis
         } else if(isGameOver)
         {
             for (int i = 0; i < 300; i++)
@@ -50,6 +57,7 @@ public class LevelController : MonoBehaviour
                 var ennemi = Instantiate(ennemiMechant, GetRandomPosition(), ennemiMechant.transform.rotation);
                 ennemi.GetComponent<EnemyController>().InitializeEnemy(amelioration);
                 SpawnPowerUp();
+
             }
 
 
@@ -65,11 +73,13 @@ public class LevelController : MonoBehaviour
         for (int i = 0;i < nombrePowerUpSpawn;i++)
             Instantiate(powerUp, GetRandomPosition(),
                 powerUp.transform.rotation);
+
     }
 
     internal void GameOver()
     {
         isGameOver = true;
+        audioSource.PlayOneShot(audioClipGameOver);
     }
 
 
