@@ -35,10 +35,15 @@ Material:
   m_LockedProperties: 
   m_SavedProperties:
     serializedVersion: 3
-    m_TexEnvs: []
+    m_TexEnvs:
+    - _SampleTexture2D_9ff7ee7b1c1742fbb50f349f471355a7_Texture_1_Texture2D:
+        m_Texture: {fileID: 2800000, guid: 1432e62c10501d147a873c128326f711, type: 3}
+        m_Scale: {x: 1, y: 1}
+        m_Offset: {x: 0, y: 0}
     m_Ints: []
     m_Floats:
     - _BUILTIN_QueueControl: 0
     - _BUILTIN_QueueOffset: 0
+    - _difficulter: 0
     m_Colors: []
   m_BuildTextureStacks: []

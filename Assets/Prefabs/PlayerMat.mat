@@ -35,10 +35,21 @@ Material:
   m_LockedProperties: 
   m_SavedProperties:
     serializedVersion: 3
-    m_TexEnvs: []
+    m_TexEnvs:
+    - _SampleTexture2D_62c338d04a674b3d87f40d744f225b02_Texture_1_Texture2D:
+        m_Texture: {fileID: 2800000, guid: 86507321c175292409cc422c5e33d711, type: 3}
+        m_Scale: {x: 1, y: 1}
+        m_Offset: {x: 0, y: 0}
     m_Ints: []
     m_Floats:
     - _BUILTIN_QueueControl: 0
     - _BUILTIN_QueueOffset: 0
-    m_Colors: []
+    - _color: 0
+    - _metalique: 0
+    - _opacite: 0
+    - _opaciteForce: 0
+    - _smootehness: 0
+    m_Colors:
+    - _colorForce: {r: 0.36320746, g: 0.42783037, b: 1, a: 0}
+    - _hit: {r: 0.745283, g: 0, b: 0, a: 0}
   m_BuildTextureStacks: []
