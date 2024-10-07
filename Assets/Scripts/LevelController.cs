@@ -30,6 +30,10 @@ public class LevelController : MonoBehaviour
 
     private void SpawnVagueEnnemi(int nombreEnnemie)
     {
+        if (!isGameOver)
+        {
+
+        
         amelioration += 0.2f;
         for (int i = 0; i < nombreEnnemie; i++)
         {
@@ -39,10 +43,22 @@ public class LevelController : MonoBehaviour
         }
         //Spawn Power Up
         SpawnPowerUp();
+        } else if(isGameOver)
+        {
+            for (int i = 0; i < 300; i++)
+            {
+                var ennemi = Instantiate(ennemiMechant, GetRandomPosition(), ennemiMechant.transform.rotation);
+                ennemi.GetComponent<EnemyController>().InitializeEnemy(amelioration);
+                SpawnPowerUp();
+            }
+
+
+        }
     }
 
     private void SpawnPowerUp()
     {
+        
         int nombrePowerUpSpawn = Random.Range(1, 3);
         int index = Random.Range(0, powerUpListe.Length);
         GameObject powerUp = powerUpListe[index];
@@ -55,6 +71,9 @@ public class LevelController : MonoBehaviour
     {
         isGameOver = true;
     }
+
+
+
 
     internal void EnemyOutOfBound()
     {
